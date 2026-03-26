@@ -6,7 +6,8 @@ export interface IApi {
     post<T extends object>(uri: string, data: object, method?: ApiPostMethods): Promise<T>;
 }
 
-// ===== НОВЫЕ ИНТЕРФЕЙСЫ =====
+// Тип способа оплаты
+export type TPayment = 'card' | 'cash';
 
 // Товар
 export interface IProduct {
@@ -20,7 +21,7 @@ export interface IProduct {
 
 // Данные покупателя
 export interface IBuyer {
-    payment: 'card' | 'cash' | null;
+    payment: TPayment | null;
     email: string;
     phone: string;
     address: string;
@@ -34,11 +35,11 @@ export interface IProductsResponse {
 
 // Заказ для отправки на сервер
 export interface IOrder {
-    payment: 'card' | 'cash';
+    payment: TPayment;
     address: string;
     email: string;
     phone: string;
-    items: string[];      // массив id товаров
+    items: string[];
     total: number;
 }
 
